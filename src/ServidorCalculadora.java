@@ -17,10 +17,8 @@ public class ServidorCalculadora {
 
         try (ServerSocket socketServidor = new ServerSocket(PORTO)) {
             while (true) {
-                // Espera por un novo cliente
                 Socket socketCliente = socketServidor.accept();
 
-                // Crea un novo fío (XestorCliente) para manexar a conexión
                 XestorCliente xestor = new XestorCliente(socketCliente);
                 xestor.start();
             }
