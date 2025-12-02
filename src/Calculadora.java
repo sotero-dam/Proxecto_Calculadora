@@ -9,16 +9,39 @@ public class Calculadora {
      * @return O resultado do cálculo en String ou unha mensaxe de erro.
      */
     public static String procesarPeticion(String peticion) {
-        String[] anacos = peticion.trim().split("\\s+");
+        String peticionLimpa = peticion.trim();
 
-        if (anacos.length != 3) {
-            return "Hai problemas co teu formato, asegúrate de por espazos entre numeros e simbolos (x + x)";
+        String simbolosOperadores = "[+\\-*/%]";
+        int contaSimbolos = peticionLimpa.replaceAll("[^" + simbolosOperadores + "]", "").length();
+        int contaRaiz = peticionLimpa.toUpperCase().split("RAIZ", -1).length - 1;
+
+        if (contaSimbolos + contaRaiz > 1) {
+            return "Non podes facer operacións combinadas, fai primeiro a RAIZ ou % e logo operas co resultado ";
         }
+
+        String[] anacos = peticionLimpa.split("\\s+");
+
+        if (anacos.length < 2 || anacos.length > 3) {
+            return "Formato incorrecto. Proba: 'n1 OPERADOR n2' ou 'n1 OPERADOR 0' para RAIZ.";
+        }
+
+        if (anacos.length == 2) {
+            String op1Str = anacos[0];
+            String operacion = anacos[1];
+            String op2Str = "0";
+
+            if (!operacion.toUpperCase().equals("RAIZ")) {
+                return "Formato inválido para RAIZ, asegúrate de non por tildes. Proba: 'n1 OPERADOR n2'";
+            }
+            anacos = new String[]{op1Str, operacion, op2Str};
+        }
+
 
         try {
             String op1Str = anacos[0];
             String operacion = anacos[1];
             String op2Str = anacos[2];
+
             if (op1Str.contains(",") || op2Str.contains(",")) {
                 return "Para separar decimais usa punto non coma";
             }
@@ -27,7 +50,9 @@ public class Calculadora {
             double op2 = Double.parseDouble(op2Str);
             double resultado = 0;
 
-            switch (operacion) {
+            String operacionUpper = operacion.toUpperCase();
+
+            switch (operacionUpper) {
                 case "+":
                     resultado = op1 + op2;
                     break;
@@ -43,8 +68,20 @@ public class Calculadora {
                     }
                     resultado = op1 / op2;
                     break;
+
+                case "%":
+                    resultado = op1 * (op2 / 100.0);
+                    break;
+
+                case "RAIZ":
+                    if (op1 < 0) {
+                        return "Oi, son unha calculadora simple, non fago raices de negativos";
+                    }
+                    resultado = Math.sqrt(op1);
+                    break;
+
                 default:
-                    return "Eso que escribiches non é valido";
+                    return "Iso que escribiches non é valido";
             }
 
             return String.valueOf(resultado);
