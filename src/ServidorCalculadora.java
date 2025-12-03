@@ -10,7 +10,7 @@ public class ServidorCalculadora {
     private static final int PORTO = 2500;
 
     /**
-     * Inicia o servidor, acepta conexións e crea fíos para xestionar cada cliente.
+     * Inicia o servidor, acepta conexións e crea fíos para xestionar indiidualmente cada cliente.
      */
     public static void main(String[] args) {
         System.out.println("Servidor iniciado e escoitando no porto " + PORTO + "...");

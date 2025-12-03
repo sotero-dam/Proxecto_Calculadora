@@ -27,7 +27,7 @@ public class ClienteCalculadora {
             System.out.println("Todo ben. Escribe 'SAIR' para terminar.");
             System.out.println("Como funciona?: Escribe OPERACION n1 n2 (SUMA 1 5),(20 % 30), (2 RAIZ),(ACUMULAR + 5), (LAST_RES * 2), TES QUE POR ESPAZOS");
             System.out.println("NON ACEPTO OPERACIÓNS COMBINADAS");
-            System.out.println("Operacións dispoñibles : SUMA; RESTA, DIVISION, MULTIPLICACION, PORCENTAXE, RAIZ, ACuaMULAR, LAST_RES");
+            System.out.println("Operacións dispoñibles : SUMA; RESTA, DIVISION, MULTIPLICACION, PORCENTAXE, RAIZ, ACUMULAR, LAST_RES");
             String operacion;
 
             while (true) {

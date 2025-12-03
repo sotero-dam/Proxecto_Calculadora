@@ -16,7 +16,6 @@ public class XestorCliente extends Thread {
      */
     public XestorCliente(Socket socket) {
         this.socketCliente = socket;
-        // INSTANCIACIÓN DAS NOVAS CLASES
         this.memoriaSesion = new MemoriaSesion();
         this.procesador = new ProcesadorPeticions(memoriaSesion);
     }
@@ -37,7 +36,6 @@ public class XestorCliente extends Thread {
             String peticion;
 
             while ((peticion = entrada.readLine()) != null) {
-                // MODIFICACIÓN MÍNIMA: CHAMA AO NOVO PROCESADOR NO LUGAR DE CALCULADORA ESTÁTICA
                 String resposta = procesador.procesar(peticion);
                 saida.println(resposta);
             }
